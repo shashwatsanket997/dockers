@@ -1,0 +1,18 @@
+ 1129  sudo docker swarm leave –force
+ 1131  sudo docker swarm leave
+ 1132  docker swarm init --advertise-addr 52.66.119.90
+ 1134  docker node ls
+ 1143  docker node update --availability drain ip-172-31-25-195
+ 1144  docker swarm join-token manager
+ 1146  docker node update --availability drain Django-mamager2
+ 1147  docker node ls
+ 1148  docker node update --availability drain Django-manager2
+ 1154  sh create_instance.sh worker1
+ 1155  sh create_instance.sh worker2
+ 1156  docker-machine start worker2 && docker-machine regenerate-certs -f worker2
+ 1166  docker node ls
+ 1167  eval $(docker-machine env -u)
+ 1168  docker-machine ls
+ 1169  docker service create  -p 5557:5557   --replicas 100  --name test  --update-delay 10s   --with-registry-auth --limit-memory 50mb --health-interval 50s --health-retries 2 --health-timeout 3s --health-cmd "python3 /usr/src/app/healthcheck.py" --restart-condition any  mangohub/zmq-sample-one:latest
+ 1170  docker service ps test
+
