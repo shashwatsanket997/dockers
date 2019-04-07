@@ -29,7 +29,7 @@ case $DOCKER_MACHINE_NAME in
         #docker swarm leave --force
         sleep 10
         echo "joining swarm"
-        docker swarm join --token $TOKEN 18.223.32.218:2377
+        docker swarm join --token $TOKEN 172.31.35.74:2377
 
         sleep 10
         eval $(docker-machine env -u)
