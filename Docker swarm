@@ -13,6 +13,6 @@
  1166  docker node ls
  1167  eval $(docker-machine env -u)
  1168  docker-machine ls
- 1169  docker service create  -p 5557:5557   --replicas 100  --name test  --update-delay 10s   --with-registry-auth --limit-memory 50mb --health-interval 50s --health-retries 2 --health-timeout 3s --health-cmd "python3 /usr/src/app/healthcheck.py" --restart-condition any  mangohub/zmq-sample-one:latest
+ 1169  docker service create  -p 5557:5557   --replicas 100  --name test  --update-delay 10s   --with-registry-auth --limit-memory 50mb --health-interval 50s --health-retries 2 --health-timeout 3s --health-cmd "python3 /usr/src/app/healthcheck.py" --restart-condition any  shashwatsanket997/multilang1:latest
  1170  docker service ps test
 

@@ -54,24 +54,6 @@ elif [ "$TYPE" == "Python" ]; then
     else
         echo 'Ran correctly'
     fi
-
-elif [ "$TYPE" == "Csharp" ]; then
-    mcs $SCRIPTDIR$INPUTFILENAME.cs 1>$SCRIPTDIR$INPUTFILENAME-compileout.txt 2>$SCRIPTDIR$INPUTFILENAME-erroroutput.txt
-    RESULT=$?
-    echo $RESULT
-    if [ $RESULT -eq 0 ]; then
-        echo "No error - Excecuting code"
-        timeout $TIMEOUT mono $SCRIPTDIR$INPUTFILENAME.exe <"codes/input.txt"  1> $SCRIPTDIR$INPUTFILENAME-stdout.txt 2> $SCRIPTDIR$INPUTFILENAME-stderror.txt
-#        echo "No error"
-        if [ $? -eq 124 ]; then
-            echo 'timeout' > $SCRIPTDIR$TIMEOUTFILE
-        else
-            echo 'Ran correctly'
-        fi
-    else
-        echo "Error while compiling C Code"
-    fi
-
 fi
-    
+
 exit $RESULT
