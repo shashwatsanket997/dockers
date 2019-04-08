@@ -1,8 +1,11 @@
 FROM ubuntu:latest
 MAINTAINER Kumar Shubham "kumar.shubham2015@vit.ac.in"
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update -y
 RUN apt-get install -y python3 python3-pip python3-dev build-essential
+RUN apt-get install -y mono-mcs
 
 RUN ["adduser",  "--home",  "/usr/src/app", "--system", "sandboxuser"]
 RUN ["chown", "-R", "sandboxuser", "/usr/src/app"]
