@@ -42,7 +42,7 @@ while True:
             command = './runcode.sh C {}-{}-{} {}'.format(message['id'],port, timestamp, timeout)
             os.system(command)
             if os.path.exists('codes/{}-{}-{}-compileout.txt'.format(message['id'],port, timestamp)):
-                with open('codes/{}-{}-{}-compileout.txt'.format(message['id'],port, timestamp), 'r') as myfile:
+                with open('codes/{}-{}-{}-testcase_compileout.txt'.format(message['id'],port, timestamp), 'r') as myfile:
                     out['compileout'] = myfile.read()
                 if os.path.isfile('codes/{}-{}-{}-compileout.txt'.format(message['id'],port, timestamp)):
                     os.remove('codes/{}-{}-{}-compileout.txt'.format(message['id'],port, timestamp))
@@ -186,6 +186,54 @@ while True:
                 if os.path.isfile('codes/timeout.txt'):
                     os.remove('codes/timeout.txt')
                     out['testcase_timeout'] = True
+
+        elif lang == 'Csharp':
+            print ("excecuting Charp code {}-{}-{}".format(message['id'],port, timestamp))
+            with open('codes/{}-{}-{}.cs'.format(message['id'],port, timestamp), 'w') as myfile:
+                myfile.write(message['code'])
+            command = './runcode.sh Charp {}-{}-{} {}'.format(message['id'], port, timestamp, timeout)
+            os.system(command)
+            if os.path.exists('codes/{}-{}-{}-stdout.txt'.format(message['id'], port, timestamp)):
+                with open('codes/{}-{}-{}-stdout.txt'.format(message['id'], port, timestamp), 'r') as myfile:
+                    out['stdout'] = myfile.read()
+                if os.path.isfile('codes/{}-{}-{}-stdout.txt'.format(message['id'], port, timestamp)):
+                    os.remove('codes/{}-{}-{}-stdout.txt'.format(message['id'], port, timestamp))
+            if os.path.exists('codes/{}-{}-{}-stderror.txt'.format(message['id'], port, timestamp)):
+                with open('codes/{}-{}-{}-stderror.txt'.format(message['id'], port, timestamp), 'r') as myfile:
+                    out['stderror'] = myfile.read()
+                if os.path.isfile('codes/{}-{}-{}-stderror.txt'.format(message['id'], port, timestamp)):
+                    os.remove('codes/{}-{}-{}-stderror.txt'.format(message['id'], port, timestamp))
+            if os.path.isfile('codes/{}-{}-{}.cs'.format(message['id'],port, timestamp)):
+                os.remove('codes/{}-{}-{}.cs'.format(message['id'],port, timestamp))
+            if os.path.isfile('codes/{}-{}-{}.exe'.format(message['id'],port, timestamp)):
+                os.remove('codes/{}-{}-{}.exe'.format(message['id'],port, timestamp))
+            if os.path.isfile('codes/timeout.txt'):
+                os.remove('codes/timeout.txt')
+                out['codetimeout'] = True
+
+            if testcasepresent:
+                with open('codes/{}-{}-{}.cs'.format(message['id'], port, timestamp), 'w') as myfile:
+                    myfile.write(message['testcase'])
+                command = './runcode.sh Csharp {}-{}-{} {}'.format(message['id'], port, timestamp, timeout)
+                os.system(command)
+                if os.path.exists('codes/{}-{}-{}-stdout.txt'.format(message['id'], port, timestamp)):
+                    with open('codes/{}-{}-{}-stdout.txt'.format(message['id'], port, timestamp), 'r') as myfile:
+                        out['testcase_stdout'] = myfile.read()
+                    if os.path.isfile('codes/{}-{}-{}-stdout.txt'.format(message['id'], port, timestamp)):
+                        os.remove('codes/{}-{}-{}-stdout.txt'.format(message['id'], port, timestamp))
+                if os.path.exists('codes/{}-{}-{}-stderror.txt'.format(message['id'], port, timestamp)):
+                    with open('codes/{}-{}-{}-stderror.txt'.format(message['id'], port, timestamp), 'r') as myfile:
+                        out['testcase_stderror'] = myfile.read()
+                    if os.path.isfile('codes/{}-{}-{}-stderror.txt'.format(message['id'], port, timestamp)):
+                        os.remove('codes/{}-{}-{}-stderror.txt'.format(message['id'], port, timestamp))
+                if os.path.isfile('codes/{}-{}-{}.cs'.format(message['id'], port, timestamp)):
+                    os.remove('codes/{}-{}-{}.cs'.format(message['id'], port, timestamp))
+                if os.path.isfile('codes/{}-{}-{}.exe'.format(message['id'], port, timestamp)):
+                    os.remove('codes/{}-{}-{}.exe'.format(message['id'], port, timestamp))
+                if os.path.isfile('codes/timeout.txt'):
+                    os.remove('codes/timeout.txt')
+                    out['testcase_timeout'] = True
+            
         socket.send_json(out)
         shutil.rmtree('/usr/src/app/codes',ignore_errors=True)
     except Exception as e:

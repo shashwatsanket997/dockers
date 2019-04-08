@@ -4,12 +4,14 @@ MAINTAINER Kumar Shubham "kumar.shubham2015@vit.ac.in"
 RUN apt-get update -y
 RUN apt-get install -y python3 python3-pip python3-dev build-essential
 
+
 RUN ["adduser",  "--home",  "/usr/src/app", "--system", "sandboxuser"]
 RUN ["chown", "-R", "sandboxuser", "/usr/src/app"]
 RUN ["chmod", "-R", "u+rwx", "/usr/src/app"]
 
 COPY . /usr/src/app
 WORKDIR /usr/src/app
+
 
 RUN chmod 755 /usr/src/app/runcode.sh
 
