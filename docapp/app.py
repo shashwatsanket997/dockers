@@ -191,7 +191,7 @@ while True:
             print ("excecuting Charp code {}-{}-{}".format(message['id'],port, timestamp))
             with open('codes/{}-{}-{}.cs'.format(message['id'],port, timestamp), 'w') as myfile:
                 myfile.write(message['code'])
-            command = './runcode.sh Charp {}-{}-{} {}'.format(message['id'], port, timestamp, timeout)
+            command = './runcode.sh Csharp {}-{}-{} {}'.format(message['id'], port, timestamp, timeout)
             os.system(command)
             if os.path.exists('codes/{}-{}-{}-stdout.txt'.format(message['id'], port, timestamp)):
                 with open('codes/{}-{}-{}-stdout.txt'.format(message['id'], port, timestamp), 'r') as myfile:
