@@ -54,6 +54,14 @@ elif [ "$TYPE" == "Python" ]; then
     else
         echo 'Ran correctly'
     fi
+elif [ "$TYPE" == "js" ]; then
+#    echo "firejail --quiet python $SCRIPTDIR$INPUTFILENAME.py 1> $SCRIPTDIR$INPUTFILENAME-stdout.txt 2> $SCRIPTDIR$INPUTFILENAME-stderror.txt"
+    timeout $TIMEOUT node $SCRIPTDIR$INPUTFILENAME.js < "codes/input.txt" 1> $SCRIPTDIR$INPUTFILENAME-stdout.txt 2> $SCRIPTDIR$INPUTFILENAME-stderror.txt
+    if [ $? -eq 124 ]; then
+        echo 'timeout' > $SCRIPTDIR$TIMEOUTFILE
+    else
+        echo 'Ran correctly'
+    fi
 elif [ "$TYPE" == "Csharp" ]; then 
     mcs $SCRIPTDIR$INPUTFILENAME.cs 1>$SCRIPTDIR$INPUTFILENAME-compileout.txt 2>$SCRIPTDIR$INPUTFILENAME-erroroutput.txt
     RESULT=$?

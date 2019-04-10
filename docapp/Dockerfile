@@ -1,11 +1,12 @@
 FROM ubuntu:latest
-MAINTAINER Kumar Shubham "kumar.shubham2015@vit.ac.in"
+MAINTAINER Kumar Shubham "shashwatsanket997@gmail.com"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -y
 RUN apt-get install -y python3 python3-pip python3-dev build-essential
 RUN apt-get install -y mono-mcs
+RUN apt-get install -y nodejs
 
 RUN ["adduser",  "--home",  "/usr/src/app", "--system", "sandboxuser"]
 RUN ["chown", "-R", "sandboxuser", "/usr/src/app"]
